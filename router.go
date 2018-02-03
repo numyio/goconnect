@@ -16,7 +16,7 @@ func getAccounts(w http.ResponseWriter, r *http.Request) {
 }
 
 func getAccount(w http.ResponseWriter, r *http.Request) {
-	db := NewDB()
+	db := newDB()
 	c := db.Session.DB("goconnect").C("people")
 	result := Person{}
 	c.Find(bson.M{"name": "Ale"}).One(&result)

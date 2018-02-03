@@ -27,7 +27,7 @@ type Account struct {
 }
 
 // NewDB : MongoDB Session
-func NewDB() *DB {
+func newDB() *DB {
 	fmt.Println("Connecting to database...")
 	session, err := mgo.Dial("localhost") // connect to mongo
 	if err != nil {
