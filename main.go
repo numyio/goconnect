@@ -11,13 +11,23 @@ import (
 )
 
 func main() {
+	go echoServer()
+	httpServer()
+
+}
+
+func echoServer() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Static("/", "/static")
-	e.GET("/ws", sendAndRecieve)
-	e.Logger.Fatal(e.Start(":1323"))
+	fmt.Println("echo")
 
+	log.Fatal(e.Start(":1323"))
+
+}
+
+func httpServer() {
 	fmt.Println("Listening on port 8000 for REST requests")
 	router := mux.NewRouter()
 	router.HandleFunc("/accounts", getAccounts).Methods("GET")
@@ -25,5 +35,4 @@ func main() {
 	router.HandleFunc("/accounts/{id}", createAccount).Methods("POST")
 	router.HandleFunc("/accounts/{id}", deleteAccount).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8000", router))
-
 }

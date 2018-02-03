@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
+	"github.com/gorilla/websocket"
 	"github.com/labstack/echo"
-	"golang.org/x/net/websocket"
 )
 
 var (
@@ -17,7 +17,7 @@ func sendAndRecieve(c echo.Context) error {
 		return err
 	}
 
-	defer ws.close()
+	defer ws.Close()
 
 	for {
 		// send to client
